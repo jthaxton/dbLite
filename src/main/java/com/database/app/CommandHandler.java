@@ -7,6 +7,7 @@ public class CommandHandler
 {
     public static void call()
     {
+      System.out.print("DBLite> ");
       BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
       try {
         String[] splitInput = reader.readLine().toLowerCase().split(" ");
