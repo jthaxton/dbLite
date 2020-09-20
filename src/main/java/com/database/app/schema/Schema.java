@@ -12,19 +12,17 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import java.util.Stack;
+import java.util.Iterator;
 
 public class Schema 
 {
-    // public static boolean validate()
-    // {
-    //   return true;
-    // }
-
     public static void create()
     {
       String version = Long.toString(System.currentTimeMillis());
       JSONObject object = new JSONObject();
       JSONArray migrations = new JSONArray();
+      JSONArray tableNames = new JSONArray();
+      JSONObject tables = new JSONObject();
       try {
         File file = new File("schema.json");
         if(file.exists()) {
@@ -36,6 +34,8 @@ public class Schema
           object.put("version", version);
           object.put("lastMigrationApplied", "");
           object.put("migrationsApplied", migrations);
+          object.put("tableNames", tableNames);
+          object.put("tables", tables);
           schema.write(object.toJSONString());
           schema.close();
           System.out.println("Schema created: schema.json");
@@ -46,7 +46,7 @@ public class Schema
 
     public static void drop() {
       System.out.println("WARNING: THIS WILL PERMANENTLY DELETE YOUR SCHEMA. DO YOU WISH TO CONTINUE? (y/n)");
-      yesOrNo();
+      shouldDeleteSchema();
     }
 
     public static void migrate() {
@@ -54,6 +54,8 @@ public class Schema
         try {
         Object obj = parser.parse(new FileReader("schema.json"));
         JSONObject json = (JSONObject) obj;
+        JSONObject tables = (JSONObject) json.get("tables");
+        JSONArray tableNames = (JSONArray) json.get("tableNames");
         String lastVersion = json.get("lastMigrationApplied").toString();
         if (migrationsUpToDate()) {
         return;
@@ -69,26 +71,29 @@ public class Schema
       }
 
       String lastMigration = "";
-      JSONArray migrations = (JSONArray) json.get("migrationsApplied");
-      
       while(stack.size() > 0) {
         String file = stack.pop().getName();
+        System.out.println("Applying " + file);
         lastMigration = file;
-        System.out.println(lastMigration);
-        migrations.add(file);
+        Object migrationFile = parser.parse(new FileReader("migrations/" + file));
+        JSONObject migrationFileJSONObj = (JSONObject) migrationFile;
+        JSONObject fieldsJSONObj = (JSONObject) migrationFileJSONObj.get("fields");
 
+        tables.put(migrationFileJSONObj.get("tableName"), fieldsJSONObj);
+        tableNames.add(migrationFileJSONObj.get("tableName"));
+        generateDataStructure(migrationFileJSONObj);
       }
-      System.out.println(migrations.size());
       String splitMigration = lastMigration.split("_")[0];
       json.put("lastMigrationApplied", lastMigration);
-      json.put("migrationsApplied", migrations);
+      json.put("tableNames", tableNames);
       json.put("version", splitMigration);
+      json.put("tables", tables);
       System.out.println(json);
       BufferedWriter schema = new BufferedWriter(new FileWriter("schema.json"));
       schema.write(json.toJSONString());
       schema.close();
     } catch(Exception e) {
-      System.out.println(e);
+      System.out.println("Something went wrong");
     }
     }
 
@@ -99,17 +104,23 @@ public class Schema
         BufferedWriter migration = new BufferedWriter(new FileWriter(filename));
         JSONObject object = new JSONObject();
         JSONObject fields = new JSONObject();
+        JSONObject idValidator = new JSONObject();
+        idValidator.put("type", "int");
+        idValidator.put("null", "false");
+        idValidator.put("index", "true");
+        fields.put("id", idValidator);
         object.put("version", version);
         object.put("tableName", tableName.toLowerCase());
         object.put("fields", fields);
         migration.write(object.toJSONString());
         migration.close();
+        System.out.println(name + " migration created.");
       } catch(Exception e) {
         System.out.println(e);
       }
     }
 
-    static void yesOrNo() {
+    static void shouldDeleteSchema() {
       BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
       try {
         switch(reader.readLine().toLowerCase()) {
@@ -140,6 +151,8 @@ public class Schema
       try {     
         Object obj = parser.parse(new FileReader("schema.json"));
         JSONObject json = (JSONObject) obj;
+        System.out.println(version);
+        System.out.println(json.get("version"));
         if (json.get("version").equals(version)) {
           System.out.println("Migrations up to date.");
           return true;
@@ -148,6 +161,23 @@ public class Schema
       } catch (Exception e) {
         System.out.println(e);
         return false;
+      }
+    }
+
+    static void generateDataStructure(JSONObject migrationFileJSONObj) {
+      String tableName = (String) migrationFileJSONObj.get("tableName");
+      File tableDir = new File(".data/" + tableName);
+      if(!tableDir.exists()) {
+        tableDir.mkdir();
+      }
+      JSONObject fields = (JSONObject) migrationFileJSONObj.get("fields");
+      Iterator keys = fields.keySet().iterator();
+      while(keys.hasNext()) {
+        String key = (String) keys.next();
+        File fieldDir = new File(".data/" + tableName + "/" + key);
+        if (!fieldDir.exists()) {
+          fieldDir.mkdir();
+        }
       }
     }
 }

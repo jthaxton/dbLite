@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.database.app.AppTest" time="0.024" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.database.app.AppTest" time="0.028" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="13"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/Users/joethaxton/Desktop/database/graphDB/target/test-classes:/Users/joethaxton/Desktop/database/graphDB/target/classes:/Users/joethaxton/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/joethaxton/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/joethaxton/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar:"/>
+    <property name="java.class.path" value="/Users/joethaxton/Desktop/database/dbLite/target/test-classes:/Users/joethaxton/Desktop/database/dbLite/target/classes:/Users/joethaxton/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/joethaxton/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/joethaxton/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar:"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://openjdk.java.net/"/>
@@ -12,9 +12,9 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/usr/local/Cellar/openjdk/13.0.2+8_2/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/joethaxton/Desktop/database/graphDB/target/surefire/surefirebooter9816881425884294509.jar /Users/joethaxton/Desktop/database/graphDB/target/surefire 2020-09-19T20-32-58_219-jvmRun1 surefire16528857762101898569tmp surefire_04698161180465389397tmp"/>
+    <property name="sun.java.command" value="/Users/joethaxton/Desktop/database/dbLite/target/surefire/surefirebooter13523546927071563802.jar /Users/joethaxton/Desktop/database/dbLite/target/surefire 2020-09-20T10-44-27_233-jvmRun1 surefire17960956822063017500tmp surefire_02808798516968123472tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="/Users/joethaxton/Desktop/database/graphDB/target/test-classes:/Users/joethaxton/Desktop/database/graphDB/target/classes:/Users/joethaxton/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/joethaxton/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/joethaxton/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar:"/>
+    <property name="surefire.test.class.path" value="/Users/joethaxton/Desktop/database/dbLite/target/test-classes:/Users/joethaxton/Desktop/database/dbLite/target/classes:/Users/joethaxton/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/joethaxton/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/joethaxton/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/Users/joethaxton"/>
     <property name="user.language" value="en"/>
@@ -22,12 +22,12 @@
     <property name="java.version.date" value="2020-01-14"/>
     <property name="java.home" value="/usr/local/Cellar/openjdk/13.0.2+8_2/libexec/openjdk.jdk/Contents/Home"/>
     <property name="file.separator" value="/"/>
-    <property name="basedir" value="/Users/joethaxton/Desktop/database/graphDB"/>
+    <property name="basedir" value="/Users/joethaxton/Desktop/database/dbLite"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="/Users/joethaxton/Desktop/database/graphDB/target/surefire/surefirebooter9816881425884294509.jar"/>
+    <property name="surefire.real.class.path" value="/Users/joethaxton/Desktop/database/dbLite/target/surefire/surefirebooter13523546927071563802.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="13.0.2+8"/>
     <property name="user.name" value="joethaxton"/>
@@ -40,7 +40,7 @@
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="/var/folders/mf/pbnxdck51clgcs914zbc5_l40000gn/T/"/>
     <property name="java.version" value="13.0.2"/>
-    <property name="user.dir" value="/Users/joethaxton/Desktop/database/graphDB"/>
+    <property name="user.dir" value="/Users/joethaxton/Desktop/database/dbLite"/>
     <property name="os.arch" value="x86_64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="java.library.path" value="/Users/joethaxton/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
