@@ -22,8 +22,12 @@ public class CommandHandler
             Schema.migrate();
             break;
           case "schema:migrate:create":
-            Schema.createMigration(splitInput[1], splitInput[2]);
+            Migration.create(splitInput[1], splitInput[2]);
             break;
+          case "write":
+            System.out.print("DBLite> ");
+            // BufferedReader jsonInput = new BufferedReader(new InputStreamReader(System.in));
+            // Model.write(jsonInput);
           case "exit":
             return;
           default:

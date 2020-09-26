@@ -1,7 +1,6 @@
 package com.database.app;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.File;
@@ -95,29 +94,6 @@ public class Schema
     } catch(Exception e) {
       System.out.println("Something went wrong");
     }
-    }
-
-    public static void createMigration(String name, String tableName) {
-      try {
-        String version = Long.toString(System.currentTimeMillis());
-        String filename = "migrations/" + version + "_" + name + ".json";
-        BufferedWriter migration = new BufferedWriter(new FileWriter(filename));
-        JSONObject object = new JSONObject();
-        JSONObject fields = new JSONObject();
-        JSONObject idValidator = new JSONObject();
-        idValidator.put("type", "int");
-        idValidator.put("null", "false");
-        idValidator.put("index", "true");
-        fields.put("id", idValidator);
-        object.put("version", version);
-        object.put("tableName", tableName.toLowerCase());
-        object.put("fields", fields);
-        migration.write(object.toJSONString());
-        migration.close();
-        System.out.println(name + " migration created.");
-      } catch(Exception e) {
-        System.out.println(e);
-      }
     }
 
     static void shouldDeleteSchema() {
