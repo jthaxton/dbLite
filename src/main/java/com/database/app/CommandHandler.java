@@ -13,7 +13,7 @@ public class CommandHandler
       BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
       try {
         String[] splitInput = reader.readLine().split(" ");
-
+        JSONParser parser = new JSONParser();
         if(splitInput[0].equals("schema:create")) {
             Schema.create();
         } else if (splitInput[0].equals("schema:drop")) {
@@ -24,15 +24,18 @@ public class CommandHandler
           Migration.create(splitInput[1], splitInput[2]);
         } else if (splitInput[0].equals("write")) {
           try {
-          JSONParser parser = new JSONParser();
           JSONObject json = (JSONObject) parser.parse(splitInput[2]);
-          System.out.println(splitInput[2]);
-          System.out.println(json);
-          System.out.println(splitInput[1]);
           Writer.write(splitInput[1].toString(), json);
           } catch(Exception e) {
             System.out.println("Unable to write");
           }
+        } else if (splitInput[0].equals("find")) {
+          Reader.find(splitInput[1], splitInput[2]);
+        } else if (splitInput[0].equals("findBy")) {
+          try {
+          JSONObject json = (JSONObject) parser.parse(splitInput[2]);
+          Reader.findBy(splitInput[1], json);
+          } catch(Exception e) {}
         } else if (splitInput[0].equals("exit")) {
           return;
         } else {
@@ -44,3 +47,4 @@ public class CommandHandler
       }
     }
 }
+// {"id":"3","address":"23a","name":"ayylmao","cashDollars":"234"}
