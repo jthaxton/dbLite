@@ -10,8 +10,8 @@ public class JsonUtility {
     JSONArray jsonArray = new JSONArray();
     
     while (x.hasNext()){
-        String key = (String) x.next();
-        jsonArray.add(key);
+      String key = (String) x.next();
+      jsonArray.add(key);
     }
     return jsonArray;
   }

@@ -121,7 +121,6 @@ public class Writer {
       System.out.println(file.getName().toString().split(".json")[0]);
       int id = Integer.parseInt(file.getName().toString().split(".json")[0]);
 
-
       if (id > maxId) {
         maxId = id;
       }
